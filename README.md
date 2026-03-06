@@ -121,9 +121,7 @@ http://localhost:8000
 
 # 📸 Application 
 
-```
 ![Company Profile UD kharisma Tunggal](images/poster.png)
-```
 
 ---
 
