@@ -49,28 +49,6 @@ Teknologi yang digunakan dalam pengembangan aplikasi ini:
 
 ---
 
-# 📂 Project Structure
-
-Struktur folder utama pada project:
-
-```
-kharisma-tunggal
-│
-├── app
-├── config
-├── database
-├── public
-├── resources
-│   ├── views
-│   ├── css
-│   └── js
-├── routes
-├── storage
-└── README.md
-```
-
----
-
 # ⚙️ Installation
 
 Ikuti langkah berikut untuk menjalankan project secara lokal.
