@@ -1,21 +1,31 @@
-stage('Deploy') {
-    steps {
-        script {
-            docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
-                sshagent (credentials: ['ssh-prod']) {
+pipeline {
+    agent any
 
-                    sh 'mkdir -p ~/.ssh'
-                    sh 'ssh-keyscan -H "$PROD_HOST" >> ~/.ssh/known_hosts'
+    stages {
 
-                    sh '''
-                    rsync -rav --delete ./ \
-                    ubuntu@$PROD_HOST:/home/ubuntu/prod.kelasdevops.xyz \
-                    --exclude=.env \
-                    --exclude=storage \
-                    --exclude=.git
-                    '''
-                }
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/Dema08/Company-Profile-UD-Kharismatunggal-Tunggal-Semester-3-.git'
             }
         }
+
+        stage('Build') {
+            steps {
+                sh 'echo Build Stage'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo Test Stage'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application'
+            }
+        }
+
     }
 }
