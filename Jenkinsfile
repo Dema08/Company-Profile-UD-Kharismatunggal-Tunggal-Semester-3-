@@ -1,18 +1,21 @@
-node {
-    checkout scm
+stage('Deploy') {
+    steps {
+        script {
+            docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
+                sshagent (credentials: ['ssh-prod']) {
 
-    stage("Build") {
-        docker.image('composer:2.7').inside('-u root') {
-            sh '''
-            git config --global --add safe.directory /var/jenkins_home/workspace/Laraveldev
-            composer install --no-interaction --prefer-dist
-            '''
-        }
-    }
+                    sh 'mkdir -p ~/.ssh'
+                    sh 'ssh-keyscan -H "$PROD_HOST" >> ~/.ssh/known_hosts'
 
-    stage("Test") {
-        docker.image('ubuntu:22.04').inside('-u root') {
-            sh 'echo "Ini adalah test stage Jenkins pipeline"'
+                    sh '''
+                    rsync -rav --delete ./ \
+                    ubuntu@$PROD_HOST:/home/ubuntu/prod.kelasdevops.xyz \
+                    --exclude=.env \
+                    --exclude=storage \
+                    --exclude=.git
+                    '''
+                }
+            }
         }
     }
 }
