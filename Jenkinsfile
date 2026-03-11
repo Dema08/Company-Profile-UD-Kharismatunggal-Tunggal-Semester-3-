@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/Dema08/Company-Profile-UD-Kharismatunggal-Tunggal-Semester-3-.git'
+                git branch: 'main', url: 'https://github.com/Dema08/Company-Profile-UD-Kharismatunggal-Tunggal-Semester-3-.git'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application'
+                sh 'echo Deploy Stage'
             }
         }
 
